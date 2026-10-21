@@ -1,23 +1,32 @@
-// ===== 设计变量与基础样式 =====
+// ===== 设计变量与基础样式 - 二次元浪漫风 =====
 :root {
-  // 配色 - 深色渐变科技风
-  --bg-0: #0b1020;
-  --bg-1: #101a33;
-  --bg-soft: rgba(255, 255, 255, 0.06);
-  --bg-card: rgba(255, 255, 255, 0.05);
-  --bg-card-hover: rgba(255, 255, 255, 0.09);
-  --accent-1: #5ee7df;
-  --accent-2: #b490ca;
-  --accent-3: #f09;
-  --gradient: linear-gradient(135deg, #5ee7df 0%, #b490ca 50%, #f09 100%);
-  --gradient-soft: linear-gradient(135deg, rgba(94,231,223,0.25), rgba(180,144,202,0.25));
-  --text: #e8ecf8;
-  --text-dim: #9aa3c0;
-  --text-faint: #6a74a0;
-  --border: rgba(255, 255, 255, 0.12);
-  --radius: 16px;
+  // 配色 - 樱花粉 & 星空紫 梦幻浪漫
+  --bg-0: #1a1030;             // 深夜紫罗蓝
+  --bg-1: #261743;             // 更深星空紫
+  --bg-2: #3d2a63;
+  --bg-soft: rgba(255, 214, 240, 0.08);
+  --bg-card: rgba(255, 220, 238, 0.06);
+  --bg-card-hover: rgba(255, 200, 230, 0.12);
+  --pink-1: #ffb7d5;           // 樱花粉
+  --pink-2: #ff8fc7;           // 玫瑰粉
+  --lav: #c9a8ff;              // 薰衣草紫
+  --lav-2: #a98bff;
+  --gold: #ffe9a9;             // 星芒暖金
+  --accent-1: #ffb7d5;
+  --accent-2: #c9a8ff;
+  --accent-3: #ff8fc7;
+  --gradient: linear-gradient(135deg, #ffb7d5 0%, #c9a8ff 45%, #a98bff 100%);
+  --gradient-warm: linear-gradient(135deg, #ffd6ef 0%, #ffb7d5 40%, #ff8fc7 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(255,183,213,0.28), rgba(201,168,255,0.28));
+  --text: #f7efff;
+  --text-soft: #ffd6f0;
+  --text-dim: #d3bee8;
+  --text-faint: #9d87c4;
+  --border: rgba(255, 190, 225, 0.22);
+  --radius: 18px;
   --radius-sm: 10px;
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow: 0 20px 60px rgba(30, 15, 60, 0.6);
+  --glow-pink: 0 0 24px rgba(255, 143, 199, 0.4);
   --font-sans: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
@@ -30,40 +39,102 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans);
   color: var(--text);
-  background: var(--bg-0);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(201,168,255,0.22), transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(255,143,199,0.18), transparent 50%),
+    radial-gradient(ellipse at 50% 110%, rgba(255,183,213,0.14), transparent 60%),
+    linear-gradient(180deg, #1a1030 0%, #241643 100%);
+  background-attachment: fixed;
   line-height: 1.75;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-// 背景光晕装饰
-body::before {
-  content: "";
+// 星空 + 流星背景
+.sakura-bg {
   position: fixed;
-  top: -20%;
-  left: -10%;
-  width: 80vw;
-  height: 80vw;
-  background: radial-gradient(circle at center, rgba(94,231,223,0.15), transparent 60%);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
-  z-index: -1;
+  overflow: hidden;
+  z-index: 1;
 }
-body::after {
-  content: "";
+// 星星
+.twinkle-star {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  box-shadow: 0 0 6px 1px rgba(255,255,255,0.8);
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(0.7); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}
+// 流星
+.shooting-star {
+  position: absolute;
+  top: 0;
+  width: 120px; height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), #fff, #ffe9a9);
+  border-radius: 2px;
+  transform: rotate(-20deg);
+  opacity: 0;
+  animation: shoot var(--dur, 6s) linear var(--delay, 0s) infinite;
+}
+@keyframes shoot {
+  0% { transform: rotate(-20deg) translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  35% { opacity: 0; transform: rotate(-20deg) translateX(-60vw); }
+  100% { opacity: 0; }
+}
+// 飘落樱花瓣
+.sakura-petal {
+  position: absolute;
+  top: -5%;
+  width: var(--size, 14px);
+  height: var(--size, 14px);
+  background: radial-gradient(circle at 35% 30%, #fff, #ffd6ef 60%, #ffb7d5 100%);
+  border-radius: 90% 5% 90% 10% / 90% 80% 5% 10%;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(255, 183, 213, 0.4));
+  animation: fall linear infinite;
+  animation-duration: var(--dur, 10s);
+  animation-delay: var(--delay, 0s);
+}
+@keyframes fall {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  50% { transform: translateY(50vh) translateX(var(--sway, 20px)) rotate(180deg); }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(110vh) translateX(calc(-1 * var(--sway, 20px))) rotate(360deg); opacity: 0; }
+}
+// 爱心点缀
+.heart-float {
   position: fixed;
-  bottom: -30%;
-  right: -10%;
-  width: 90vw;
-  height: 90vw;
-  background: radial-gradient(circle at center, rgba(244,0,153,0.12), transparent 60%);
+  font-size: 1.2rem;
   pointer-events: none;
-  z-index: -1;
+  opacity: 0;
+  animation: heartFloat var(--dur, 6s) ease-in var(--delay, 0s) infinite;
+  z-index: 2;
+}
+@keyframes heartFloat {
+  0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
 }
 
 a { color: var(--accent-1); text-decoration: none; transition: all 0.3s ease; }
-a:hover { color: #fff; text-shadow: 0 0 12px rgba(94,231,223,0.6); }
+a:hover {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 183, 213, 0.8);
+}
 
-h1, h2, h3, h4 { line-height: 1.3; color: #fff; font-weight: 700; }
+h1, h2, h3, h4 { line-height: 1.35; color: var(--text-soft); font-weight: 700; }
 
 img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
 
