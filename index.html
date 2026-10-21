@@ -1,74 +1,53 @@
----
-layout: default
----
-<div class="container">
-
-  <section class="hero">
-    <div class="avatar">
-      <img src="https://github.com/{{ site.github_username }}.png" alt="{{ site.author }}">
-    </div>
-    <h1>你好，我是 {{ site.author }}</h1>
-    <p class="tagline">在星光与樱花交织的夜里，选择把每一个心动的瞬间、每一份成长与美好，都悄悄写在这里。欢迎来到我的小世界 ✨</p>
-    <div class="hero-badges">
-      <a href="https://github.com/{{ site.github_username }}" class="badge" target="_blank" rel="noopener">💻 GitHub</a>
-      <a href="{{ '/blog.html' | relative_url }}" class="badge">📝 我的博客</a>
-      <a href="{{ '/about.html' | relative_url }}" class="badge">👋 关于我</a>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <section>
-    <div class="section-title"><span class="bar"></span>🆕 最新文章</div>
-    <p class="section-subtitle">近期发布的内容</p>
-
-    <ul class="post-list">
-      {% for post in site.posts limit: 5 %}
-      <li class="post-item">
-        <div class="post-meta">
-          <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
-          {% if post.categories %}
-          <span>🗂 {{ post.categories | join: ' / ' }}</span>
-          {% endif %}
-        </div>
-        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</div>
-        {% if post.tags %}
-        <div class="post-tags">
-          {% for tag in post.tags %}
-          <span class="tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-
-    <div style="text-align:center; margin-top:28px;">
-      <a class="btn btn-primary" href="{{ '/blog.html' | relative_url }}">查看全部文章 →</a>
-    </div>
-  </section>
-
-  <section style="margin-top:60px;">
-    <div class="section-title"><span class="bar"></span>💖 关于本站</div>
-    <p class="section-subtitle">在收留些什么浪漫与美好？</p>
-    <div class="features">
-      <div class="feature-card">
-        <div class="icon">🚀</div>
-        <h3>技术随想</h3>
-        <p>编程、框架与最佳实践，用温柔的方式讲清楚复杂的问题。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmanoHInaC · 个人博客</title>
+  <meta name="description" content="在星光与樱花下，记录技术、生活与思考的个人博客。">
+  <link rel="icon" href="https://github.com/amanohinac.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="brand"><span class="dot"></span>AmanoHInaC</a>
+    <div class="nav-links"><a href="index.html" class="active">首页</a><a href="#posts">文章</a><a href="about.html">关于</a></div>
+  </nav>
+  <div class="wrap">
+    <header class="hero">
+      <div class="avatar-wrap"><img src="https://github.com/amanohinac.png" alt="头像"></div>
+      <div class="hero-eyebrow">✦ Happy coding ✦</div>
+      <h1>在星光与樱花下，<br>用心记录美好</h1>
+      <p class="sub">你好，我是 <b>AmanoHInaC</b>。这里收藏着我的<b>技术随想</b>、<b>学习笔记</b>与<b>生活碎念</b>，愿你在字里行间，遇见温柔与灵感。</p>
+      <div class="hero-actions"><a class="btn primary" href="#posts">浏览文章</a><a class="btn" href="about.html">关于我</a></div>
+    </header>
+    <section class="sec" id="posts">
+      <div class="sec-head"><div class="sec-title"><span class="tag">NEW</span> 最新文章</div><p class="sec-sub">把生活拆成一行行温柔的文字</p></div>
+      <div class="post-grid">
+        <a class="card" href="posts/2024-03-25-year-review.html">
+          <span class="go">→</span>
+          <div class="meta"><span class="date">📅 2024-03-25</span><span>🏷 随笔 · 生活</span></div>
+          <h3>我的 2024 年度回顾与展望</h3>
+          <p>过去一年我完成了什么？新的一年又该往哪走？这篇文章是我给自己的小结，也与每一位正在成长的你共勉。</p>
+          <div class="tags"><span class="tag">年度回顾</span><span class="tag">自我成长</span></div>
+        </a>
+        <a class="card" href="posts/2024-02-10-build-your-blog.html">
+          <span class="go">→</span>
+          <div class="meta"><span class="date">📅 2024-02-10</span><span>🏷 技术 · 建站</span></div>
+          <h3>如何搭建一个属于自己的技术博客</h3>
+          <p>从零开始搭建个人技术博客的完整指南，方案对比、核心步骤与避坑建议，一篇文章讲清楚。</p>
+          <div class="tags"><span class="tag">Jekyll</span><span class="tag">GitHub Pages</span><span class="tag">教程</span></div>
+        </a>
+        <a class="card" href="posts/2024-01-15-hello-world.html">
+          <span class="go">→</span>
+          <div class="meta"><span class="date">📅 2024-01-15</span><span>🏷 随笔 · 建站</span></div>
+          <h3>你好，世界！欢迎来到我的博客</h3>
+          <p>这是博客的第一篇文字。写作是留住时光最温柔的方式，欢迎来到我的小世界。</p>
+          <div class="tags"><span class="tag">欢迎</span><span class="tag">建站记录</span></div>
+        </a>
       </div>
-      <div class="feature-card">
-        <div class="icon">📚</div>
-        <h3>学习笔记</h3>
-        <p>沉淀心得与灵感，如花开般，一期一会，温故而知新。</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🌙</div>
-        <h3>生活碎念</h3>
-        <p>记录月光下的零碎思绪，愿所有不期而遇都变成温柔。</p>
-      </div>
-    </div>
-  </section>
-
-</div>
+    </section>
+  </div>
+  <footer><div>© 2024 AmanoHInaC · 用 <span class="heart">♥</span> 与星光书写</div><div style="margin-top:6px; font-size:.82rem;">托管于 GitHub Pages · <a href="about.html">关于</a></div></footer>
+</body>
+</html>

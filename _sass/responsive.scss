@@ -1,9 +1,0 @@
-// ===== 响应式 =====
-
-@media (max-width: 768px) {
-  .nav { padding: 0 16px; }
-  .nav-links a { padding: 6px 12px; font-size: 0.9rem; }
-  .hero { padding: 50px 0 24px; }
-  .post-article, .about-body { padding: 24px 18px; }
-  .features { grid-template-columns: 1fr; }
-}
