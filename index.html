@@ -1,0 +1,75 @@
+---
+layout: default
+---
+<div class="container">
+
+  <section class="hero">
+    <div class="avatar">
+      <img src="https://github.com/{{ site.github_username }}.png" alt="{{ site.author }}">
+    </div>
+    <h1>你好，我是 {{ site.author }}</h1>
+    <p class="tagline">这是我的个人博客，记录技术点滴、学习笔记与生活思考。愿你在这里有所收获。</p>
+    <div class="hero-badges">
+      <a href="https://github.com/{{ site.github_username }}" class="badge" target="_blank" rel="noopener">💻 GitHub</a>
+      <a href="{{ '/blog.html' | relative_url }}" class="badge">📝 我的博客</a>
+      <a href="{{ '/about.html' | relative_url }}" class="badge">👋 关于我</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section>
+    <div class="section-title"><span class="bar"></span>🆕 最新文章</div>
+    <p class="section-subtitle">近期发布的内容</p>
+
+    <ul class="post-list">
+      {% assign recent = site.posts | slice: 0, 5 %}
+      {% for post in recent %}
+      <li class="post-item">
+        <div class="post-meta">
+          <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
+          {% if post.categories %}
+          <span>🗂 {{ post.categories | join: ' / ' }}</span>
+          {% endif %}
+        </div>
+        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</div>
+        {% if post.tags %}
+        <div class="post-tags">
+          {% for tag in post.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div style="text-align:center; margin-top:28px;">
+      <a class="btn btn-primary" href="{{ '/blog.html' | relative_url }}">查看全部文章 →</a>
+    </div>
+  </section>
+
+  <section style="margin-top:60px;">
+    <div class="section-title"><span class="bar"></span>✨ 关于本站</div>
+    <p class="section-subtitle">这里有什么？</p>
+    <div class="features">
+      <div class="feature-card">
+        <div class="icon">🚀</div>
+        <h3>技术分享</h3>
+        <p>编程、框架、最佳实践，用通俗的语言讲清楚复杂的问题。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📚</div>
+        <h3>学习笔记</h3>
+        <p>沉淀读书与学习的心得，温故而知新。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💡</div>
+        <h3>生活思考</h3>
+        <p>记录一些碎碎念与灵感，慢下来感受生活。</p>
+      </div>
+    </div>
+  </section>
+
+</div>
