@@ -23,8 +23,7 @@ layout: default
     <p class="section-subtitle">近期发布的内容</p>
 
     <ul class="post-list">
-      {% assign recent = site.posts | slice: 0, 5 %}
-      {% for post in recent %}
+      {% for post in site.posts limit: 5 %}
       <li class="post-item">
         <div class="post-meta">
           <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
